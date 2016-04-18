@@ -95,7 +95,8 @@ public abstract class JaxRSServerContainer extends AbstractRSAContainer {
 	}
 
 	protected String createServletAlias(JaxRSServerRemoteServiceRegistration registration) {
-		return getAlias();
+		//return getAlias();
+		return (String) registration.getProperty("ecf.jaxrs.jersey.server.alias");
 	}
 
 	protected abstract Servlet createServlet(JaxRSServerRemoteServiceRegistration registration);

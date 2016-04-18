@@ -1,12 +1,16 @@
 package org.eclipse.ecf.provider.jersey.server;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.Servlet;
+import javax.ws.rs.Path;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Configuration;
+import javax.ws.rs.core.MediaType;
 
 import org.eclipse.ecf.core.ContainerTypeDescription;
 import org.eclipse.ecf.core.IContainer;
@@ -16,6 +20,8 @@ import org.eclipse.ecf.provider.jaxrs.server.JaxRSServerContainer.JaxRSServerRem
 import org.eclipse.ecf.provider.jaxrs.server.JaxRSServerDistributionProvider;
 import org.eclipse.ecf.remoteservice.RSARemoteServiceContainerAdapter.RSARemoteServiceRegistration;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.model.Resource;
+import org.glassfish.jersey.server.model.ResourceMethod;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.osgi.service.http.HttpService;
 
@@ -28,7 +34,7 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 			.getProperty(JerseyServerContainer.class.getName() + ".defaultUrlContext", "http://localhost:8080");
 	public static final String ALIAS_PARAM = "alias";
 	public static final String ALIAS_PARAM_DEFAULT = "/org.eclipse.ecf.provider.jersey.server";
-
+	
 	public JerseyServerDistributionProvider() {
 		super();
 	}
@@ -61,10 +67,17 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 		protected ResourceConfig createResourceConfig(final RSARemoteServiceRegistration registration) {
 			if (this.configuration == null) {
 				return ResourceConfig.forApplication(new Application() {
-					@Override
+					/*@Override
 					public Set<Class<?>> getClasses() {
 						Set<Class<?>> results = new HashSet<Class<?>>();
 						results.add(registration.getService().getClass());
+						return results;
+					}*/
+					
+					@Override
+					public Set<Object> getSingletons() {
+						Set<Object> results = new HashSet<Object>();
+						results.add(registration.getService());
 						return results;
 					}
 				});
@@ -75,6 +88,54 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 		@Override
 		protected Servlet createServlet(JaxRSServerRemoteServiceRegistration registration) {
 			ResourceConfig rc = createResourceConfig(registration);
+			
+			Class<?> implClass = registration.getService().getClass();
+			for (Class<?> clazz : implClass.getInterfaces()) {
+				if(clazz.getAnnotation(Path.class) == null) {
+					final Resource.Builder resourceBuilder = Resource.builder();
+					ResourceMethod.Builder methodBuilder;
+					Resource.Builder childResourceBuilder;
+					String serviceResourcePath;
+					String methodResourcePath;
+					String methodName;
+					
+					//class
+					serviceResourcePath = "/" + clazz.getSimpleName().toLowerCase();
+					resourceBuilder.path(serviceResourcePath);
+					resourceBuilder.name(implClass.getName());
+					
+					//methods
+					for(Method method : clazz.getMethods()) {
+						if(Modifier.isPublic(method.getModifiers())) {
+							methodName = method.getName().toLowerCase();
+							methodResourcePath = "/" + methodName;
+							childResourceBuilder = resourceBuilder.addChildResource(methodResourcePath);
+							
+							if(method.getAnnotation(Path.class) == null) {
+								if(method.getParameterCount() == 0) {
+									methodBuilder = childResourceBuilder.addMethod("GET");
+								}
+								else {
+									if(methodName.contains("delete")){
+										methodBuilder = childResourceBuilder.addMethod("DELETE");
+									}
+									else {
+										methodBuilder = childResourceBuilder.addMethod("POST");
+									}
+									methodBuilder.consumes(MediaType.APPLICATION_JSON);//APPLICATION_JSON)TEXT_PLAIN_TYPE
+								}
+								methodBuilder.produces(MediaType.APPLICATION_JSON)//APPLICATION_JSON)
+									//.handledBy(implClass, method)
+									.handledBy(registration.getService(), method)
+									.handlingMethod(method)
+									.extended(false);
+							}
+						}
+					}
+					final Resource resource = resourceBuilder.build();
+					rc.registerResources(resource);
+				}
+			}
 			return (rc != null) ? new ServletContainer(rc) : new ServletContainer();
 		}
 
@@ -82,7 +143,5 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 		protected HttpService getHttpService() {
 			return getHttpServices().get(0);
 		}
-
 	}
-
 }
