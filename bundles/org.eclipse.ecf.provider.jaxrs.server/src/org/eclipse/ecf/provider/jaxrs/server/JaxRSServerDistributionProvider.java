@@ -48,7 +48,7 @@ public class JaxRSServerDistributionProvider extends RemoteServiceDistributionPr
 			httpServices.remove(httpService);
 	}
 
-	protected List<HttpService> getHttpServices() {
+	public List<HttpService> getHttpServices() {
 		return httpServices;
 	}
 
