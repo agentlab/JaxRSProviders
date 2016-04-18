@@ -16,7 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/istudent")
+@Path("/ihello")
 public interface StudentService {
 
 	@GET
