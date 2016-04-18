@@ -34,7 +34,7 @@ public class Activator implements BundleActivator {
 		Dictionary serviceProps = new Hashtable();
 		serviceProps.put("service.exported.interfaces", "*");
 		serviceProps.put("service.exported.configs", "ecf.jaxrs.jersey.server");
-		serviceProps.put("ecf.jaxrs.jersey.server.alias", "/jersey/is/good");
+		serviceProps.put("ecf.jaxrs.jersey.server.alias", "/students");///jersey/is/good
 		Properties systemProperties = System.getProperties();
 		for (Enumeration systemPropNames = systemProperties.propertyNames(); systemPropNames.hasMoreElements();) {
 			String systemPropName = (String) systemPropNames.nextElement();

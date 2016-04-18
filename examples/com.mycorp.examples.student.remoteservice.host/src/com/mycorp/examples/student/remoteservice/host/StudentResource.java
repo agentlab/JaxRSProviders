@@ -16,24 +16,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import com.mycorp.examples.student.Address;
 import com.mycorp.examples.student.Student;
 import com.mycorp.examples.student.StudentService;
 
-@Path("/studentservice")
 public class StudentResource implements StudentService {
 
 	private static Map<String, Student> students = Collections.synchronizedMap(new HashMap<String, Student>());
 
+	public String hello() {
+		System.out.println("received hello");
+		return "Hello service host says 'Hi' back to ";
+	}
 	static {
 		Student s = new Student("Joe Senior");
 		s.setId(UUID.randomUUID().toString());
@@ -47,14 +41,11 @@ public class StudentResource implements StudentService {
 		students.put(s.getId(), s);
 	}
 
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	@Path("/students")
 	public List<Student> getStudents() {
 		return new ArrayList<Student>(students.values());
 	}
 
-	@GET
+	/*@GET
 	@Produces(MediaType.APPLICATION_XML)
 	@Path("/students/{studentId}")
 	public Student getStudent(@PathParam("studentId") String id) {
@@ -106,5 +97,5 @@ public class StudentResource implements StudentService {
 	public Student deleteStudent(@PathParam("studentId") String studentId) {
 		Student result = students.remove(studentId);
 		return result;
-	}
+	}*/
 }
