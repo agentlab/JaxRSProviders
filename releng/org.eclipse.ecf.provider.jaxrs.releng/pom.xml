@@ -25,6 +25,7 @@
 		<module>../../bundles/org.eclipse.ecf.provider.jersey.server</module>
 		
 		<module>../../features/org.eclipse.ecf.provider.jaxrs.client.feature</module>
+		<module>../../features/org.eclipse.ecf.provider.jaxrs.feature</module>
 		
 		<module>../org.eclipse.ecf.provider.jaxrs.repository</module>
 	</modules>
