@@ -6,7 +6,6 @@ import com.mycorp.examples.hello.model.HelloMessage;
 public class HelloComponent implements IHello {
 	
 	public HelloComponent() {
-		//System.out.println("Hello HelloComponent");
 	}
 	
 	public String hello() {
