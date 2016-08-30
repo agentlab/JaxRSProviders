@@ -2,22 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<artifactId>org.eclipse.ecf.provider.jaxrs.bundles</artifactId>
-	<packaging>pom</packaging>
+	
+	<artifactId>org.eclipse.ecf.provider.jaxrs.site</artifactId>
+	<packaging>eclipse-repository</packaging>
 
 	<parent>
 		<groupId>org.eclipse.ecf.provider.jaxrs</groupId>
-		<artifactId>org.eclipse.ecf.provider.jaxrs.releng</artifactId>
-		<version>4.12.0-SNAPSHOT</version>
-		<relativePath>../releng/org.eclipse.ecf.provider.jaxrs.releng/pom.xml</relativePath>
+		<artifactId>org.eclipse.ecf.provider.jaxrs.parent</artifactId>
+		<relativePath>../../pom.xml</relativePath>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

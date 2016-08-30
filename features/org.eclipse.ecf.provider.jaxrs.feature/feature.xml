@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.ecf.provider.jaxrs.feature"
       label="ECF JaxRS and Jersey Feature"
-      version="4.12.0.qualifier">
+      version="1.0.0.qualifier">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]

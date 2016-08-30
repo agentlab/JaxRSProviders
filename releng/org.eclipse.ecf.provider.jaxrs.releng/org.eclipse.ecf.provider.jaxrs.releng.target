@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="Generated from JaxRSProviders" sequenceNumber="8">
+<target name="Generated from JaxRSProviders" sequenceNumber="1">
   <locations>
     <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="com.ibm.icu" version="0.0.0"/>
@@ -21,6 +21,7 @@
       <unit id="org.apache.felix.gogo.command" version="0.0.0"/>
       <unit id="org.apache.felix.gogo.runtime" version="0.0.0"/>
       <unit id="org.apache.felix.gogo.shell" version="0.0.0"/>
+      <unit id="org.apache.httpcomponents.httpclient" version="0.0.0"/>
       <unit id="org.apache.httpcomponents.httpcore" version="0.0.0"/>
       <unit id="org.apache.jasper.glassfish" version="0.0.0"/>
       <unit id="org.apache.mina.core" version="0.0.0"/>
@@ -42,6 +43,8 @@
       <unit id="org.eclipse.core.jobs" version="0.0.0"/>
       <unit id="org.eclipse.core.resources" version="0.0.0"/>
       <unit id="org.eclipse.core.runtime" version="0.0.0"/>
+      <unit id="org.eclipse.core.runtime.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.core.runtime.feature.feature.jar" version="0.0.0"/>
       <unit id="org.eclipse.core.variables" version="0.0.0"/>
       <unit id="org.eclipse.debug.core" version="0.0.0"/>
       <unit id="org.eclipse.debug.ui" version="0.0.0"/>
@@ -89,6 +92,20 @@
       <unit id="org.eclipse.equinox.event" version="0.0.0"/>
       <unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.equinox.executable.feature.jar" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.cocoa.macosx.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.aix.ppc" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.aix.ppc64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.hpux.ia64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.ppc" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.ppc64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.ppc64le" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.s390" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.s390x" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.x86" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.linux.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.solaris.sparcv9" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.gtk.solaris.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable_root.win32.win32.x86" version="0.0.0"/>
       <unit id="org.eclipse.equinox.executable_root.win32.win32.x86_64" version="0.0.0"/>
       <unit id="org.eclipse.equinox.frameworkadmin" version="0.0.0"/>
       <unit id="org.eclipse.equinox.frameworkadmin.equinox" version="0.0.0"/>
@@ -101,8 +118,21 @@
       <unit id="org.eclipse.equinox.jsp.jasper" version="0.0.0"/>
       <unit id="org.eclipse.equinox.jsp.jasper.registry" version="0.0.0"/>
       <unit id="org.eclipse.equinox.launcher" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.cocoa.macosx.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.aix.ppc" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.aix.ppc64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.hpux.ia64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.ppc" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.ppc64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.ppc64le" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.s390" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.s390x" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.x86" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.linux.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.solaris.sparcv9" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.gtk.solaris.x86_64" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.launcher.win32.win32.x86" version="0.0.0"/>
       <unit id="org.eclipse.equinox.launcher.win32.win32.x86_64" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.log" version="0.0.0"/>
       <unit id="org.eclipse.equinox.metatype" version="0.0.0"/>
       <unit id="org.eclipse.equinox.p2.artifact.repository" version="0.0.0"/>
       <unit id="org.eclipse.equinox.p2.console" version="0.0.0"/>
@@ -129,7 +159,9 @@
       <unit id="org.eclipse.equinox.sdk.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.equinox.sdk.feature.jar" version="0.0.0"/>
       <unit id="org.eclipse.equinox.security" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.security.macosx" version="0.0.0"/>
       <unit id="org.eclipse.equinox.security.ui" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.security.win32.x86" version="0.0.0"/>
       <unit id="org.eclipse.equinox.security.win32.x86_64" version="0.0.0"/>
       <unit id="org.eclipse.equinox.server.core.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.equinox.server.core.feature.jar" version="0.0.0"/>
@@ -147,12 +179,9 @@
       <unit id="org.eclipse.equinox.transforms.xslt" version="0.0.0"/>
       <unit id="org.eclipse.equinox.useradmin" version="0.0.0"/>
       <unit id="org.eclipse.equinox.util" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.weaving.aspectj" version="0.0.0"/>
       <unit id="org.eclipse.equinox.weaving.caching" version="0.0.0"/>
       <unit id="org.eclipse.equinox.weaving.caching.j9" version="0.0.0"/>
       <unit id="org.eclipse.equinox.weaving.hook" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.weaving.sdk.feature.group" version="0.0.0"/>
-      <unit id="org.eclipse.equinox.weaving.sdk.feature.jar" version="0.0.0"/>
       <unit id="org.eclipse.equinox.wireadmin" version="0.0.0"/>
       <unit id="org.eclipse.help" version="0.0.0"/>
       <unit id="org.eclipse.jdt.core" version="0.0.0"/>
@@ -197,6 +226,7 @@
       <unit id="org.eclipse.ui.forms" version="0.0.0"/>
       <unit id="org.eclipse.ui.ide" version="0.0.0"/>
       <unit id="org.eclipse.ui.intro" version="0.0.0"/>
+      <unit id="org.eclipse.ui.intro.quicklinks" version="0.0.0"/>
       <unit id="org.eclipse.ui.intro.universal" version="0.0.0"/>
       <unit id="org.eclipse.ui.navigator" version="0.0.0"/>
       <unit id="org.eclipse.ui.navigator.resources" version="0.0.0"/>
@@ -218,33 +248,45 @@
       <unit id="org.w3c.dom.events" version="0.0.0"/>
       <unit id="org.w3c.dom.smil" version="0.0.0"/>
       <unit id="org.w3c.dom.svg" version="0.0.0"/>
-      <repository location="http://download.eclipse.org/eclipse/updates/4.5"/>
+      <repository location="http://download.eclipse.org/eclipse/updates/4.6"/>
     </location>
     <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="a.jre" version="0.0.0"/>
       <unit id="ch.qos.logback.classic" version="0.0.0"/>
       <unit id="ch.qos.logback.core" version="0.0.0"/>
       <unit id="ch.qos.logback.slf4j" version="0.0.0"/>
-      <unit id="com.google.guava" version="0.0.0"/>
       <unit id="com.sun.syndication" version="0.0.0"/>
-      <unit id="javassist" version="0.0.0"/>
-      <unit id="javax.servlet" version="0.0.0"/>
-      <unit id="javax.validation" version="0.0.0"/>
+      <unit id="javax.persistence" version="0.0.0"/>
       <unit id="javax.ws.rs" version="0.0.0"/>
       <unit id="org.aopalliance" version="0.0.0"/>
       <unit id="org.apache.hadoop.zookeeper" version="0.0.0"/>
       <unit id="org.apache.log4j" version="0.0.0"/>
-      <unit id="org.glassfish.hk2.api" version="0.0.0"/>
-      <unit id="org.glassfish.hk2.locator" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.remoteservice.asyncproxy" version="0.0.0"/>
+      <unit id="org.eclipse.emf.common.ui" version="0.0.0"/>
+      <unit id="org.eclipse.emf.edit" version="0.0.0"/>
+      <unit id="org.eclipse.emf.edit.ui" version="0.0.0"/>
       <unit id="org.glassfish.hk2.osgi-resource-locator" version="0.0.0"/>
-      <unit id="org.glassfish.hk2.utils" version="0.0.0"/>
       <unit id="org.jdom" version="0.0.0"/>
       <unit id="org.json" version="0.0.0"/>
-      <unit id="org.slf4j.ext" version="0.0.0"/>
       <unit id="org.slf4j.jcl" version="0.0.0"/>
+      <unit id="org.xbill.dns" version="0.0.0"/>
+      <repository location="http://download.eclipse.org/releases/neon/"/>
+    </location>
+    <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.swt.dummyfragments.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.swt.dummyfragments.feature.jar" version="0.0.0"/>
+      <unit id="org.eclipse.swt.gtk.linux.aarch64" version="0.0.0"/>
+      <unit id="org.eclipse.swt.gtk.linux.arm" version="0.0.0"/>
+      <unit id="org.eclipse.swt.gtk.solaris.sparc" version="0.0.0"/>
+      <unit id="org.eclipse.swt.gtk.solaris.x86" version="0.0.0"/>
+      <repository location="https://eclipseguru.github.io/missing-swt-fragments/"/>
+    </location>
+    <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
+      <unit id="javax.validation" version="0.0.0"/>
+      <unit id="org.slf4j.ext" version="0.0.0"/>
       <unit id="org.slf4j.jul" version="0.0.0"/>
       <unit id="org.slf4j.log4j" version="0.0.0"/>
-      <unit id="org.xbill.dns" version="0.0.0"/>
-      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20151221205849/repository"/>
+      <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository"/>
     </location>
     <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
       <unit id="ch.ethz.iks.r_osgi.remote" version="0.0.0"/>
@@ -257,7 +299,6 @@
       <unit id="com.mycorp.examples.timeservice.host" version="0.0.0"/>
       <unit id="com.mycorp.examples.timeservice.provider.rest.consumer" version="0.0.0"/>
       <unit id="com.mycorp.examples.timeservice.provider.rest.host" version="0.0.0"/>
-      <unit id="org.apache.httpcomponents.httpclient" version="0.0.0"/>
       <unit id="org.eclipse.ecf" version="0.0.0"/>
       <unit id="org.eclipse.ecf.console" version="0.0.0"/>
       <unit id="org.eclipse.ecf.console.feature.feature.group" version="0.0.0"/>
@@ -365,7 +406,6 @@
       <unit id="org.eclipse.ecf.provider.xmpp.ui" version="0.0.0"/>
       <unit id="org.eclipse.ecf.provider.zookeeper" version="0.0.0"/>
       <unit id="org.eclipse.ecf.remoteservice" version="0.0.0"/>
-      <unit id="org.eclipse.ecf.remoteservice.asyncproxy" version="0.0.0"/>
       <unit id="org.eclipse.ecf.remoteservice.eventadmin" version="0.0.0"/>
       <unit id="org.eclipse.ecf.remoteservice.examples.feature.feature.group" version="0.0.0"/>
       <unit id="org.eclipse.ecf.remoteservice.examples.feature.feature.jar" version="0.0.0"/>
@@ -411,19 +451,46 @@
       <unit id="org.eclipse.team.ecf.core" version="0.0.0"/>
       <unit id="org.eclipse.team.ecf.ui" version="0.0.0"/>
       <unit id="org.jivesoftware.smack" version="0.0.0"/>
-      <repository location="http://download.eclipse.org/rt/ecf/3.13.1/site.p2"/>
+      <repository location="http://download.eclipse.org/rt/ecf/latest/site.p2"/>
     </location>
     <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="a.jre" version="0.0.0"/>
-      <unit id="javax.persistence" version="0.0.0"/>
-      <unit id="org.eclipse.emf.common.ui" version="0.0.0"/>
-      <unit id="org.eclipse.emf.edit" version="0.0.0"/>
-      <unit id="org.eclipse.emf.edit.ui" version="0.0.0"/>
-      <repository location="http://download.eclipse.org/releases/mars"/>
+      <unit id="org.eclipse.jetty.http" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.io" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.security" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.server" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.servlet" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.util" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.api" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.client" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.common" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.server" version="0.0.0"/>
+      <unit id="org.eclipse.jetty.websocket.servlet" version="0.0.0"/>
+      <repository location="http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/9.3.10.v20160621"/>
     </location>
     <location includeAllPlatforms="true" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-      <unit id="com.google.jsr305" version="0.0.0"/>
-      <repository location="http://agentlab.ru/eclipse/update/com.google.jsr305/1.0.0.201502020347"/>
+      <unit id="com.fasterxml.jackson.core.jackson-annotations" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.core.jackson-core" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.core.jackson-databind" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.datatype.jackson-datatype-guava" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.jaxrs.jackson-jaxrs-base" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" version="0.0.0"/>
+      <unit id="com.fasterxml.jackson.module.jackson-module-jaxb-annotations" version="0.0.0"/>
+      <unit id="com.google.guava" version="0.0.0"/>
+      <unit id="javassist" version="0.0.0"/>
+      <unit id="javax.validation.api" version="0.0.0"/>
+      <unit id="org.glassfish.hk2.api" version="0.0.0"/>
+      <unit id="org.glassfish.hk2.locator" version="0.0.0"/>
+      <unit id="org.glassfish.hk2.utils" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.bundles.repackaged.jersey-guava" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.containers.jersey-container-servlet" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.containers.jersey-container-servlet-core" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.core.jersey-client" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.core.jersey-common" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.core.jersey-server" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.ext.jersey-entity-filtering" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.media.jersey-media-jaxb" version="0.0.0"/>
+      <unit id="org.glassfish.jersey.media.jersey-media-json-jackson" version="0.0.0"/>
+      <repository location="http://10.72.103.217:8090/p2/che/"/>
     </location>
   </locations>
 </target>

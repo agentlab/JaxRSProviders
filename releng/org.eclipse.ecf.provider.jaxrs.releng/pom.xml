@@ -3,53 +3,14 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.eclipse.ecf.provider.jaxrs</groupId>
 	<artifactId>org.eclipse.ecf.provider.jaxrs.releng</artifactId>
-	<version>4.12.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>eclipse-target-definition</packaging>
 	
 	<parent>
-		<groupId>org.eclipseorbit</groupId>
-		<artifactId>org.eclipseorbit.parent</artifactId>
+		<groupId>org.eclipse.ecf.provider.jaxrs</groupId>
+		<artifactId>org.eclipse.ecf.provider.jaxrs.parent</artifactId>
+		<relativePath>../../pom.xml</relativePath>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../../../orbit-parent/org.eclipseorbit.parent/pom.xml</relativePath>
 	</parent>
 	
-	<modules>
-		<module>../org.eclipse.ecf.provider.jaxrs.target</module>
-		
-		<module>../../bundles/org.eclipse.ecf.provider.jaxrs</module>
-		<module>../../bundles/org.eclipse.ecf.provider.jaxrs.client</module>
-		<module>../../bundles/org.eclipse.ecf.provider.jaxrs.server</module>
-		<module>../../bundles/org.eclipse.ecf.provider.jersey.client</module>
-		<module>../../bundles/org.eclipse.ecf.provider.jersey.server</module>
-		
-		<module>../../features/org.eclipse.ecf.provider.jaxrs.client.feature</module>
-		<module>../../features/org.eclipse.ecf.provider.jaxrs.feature</module>
-		
-		<module>../org.eclipse.ecf.provider.jaxrs.repository</module>
-	</modules>
-	
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-platform-configuration</artifactId>
-				<configuration>
-					<target>
-						<artifact>
-							<groupId>org.eclipse.ecf.provider.jaxrs</groupId>
-							<artifactId>org.eclipse.ecf.provider.jaxrs.target</artifactId>
-							<version>4.12.0-SNAPSHOT</version>
-						</artifact>
-					</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-surefire-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>
