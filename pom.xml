@@ -12,7 +12,6 @@
 	<parent>
 		<groupId>org.eclipseorbit</groupId>
 		<artifactId>org.eclipseorbit.parent</artifactId>
-		<relativePath>../orbit-parent/org.eclipseorbit.parent/pom.xml</relativePath>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
@@ -76,11 +75,11 @@
 		</plugins>
 	</build>
 	
-	<distributionManagement>
+	<repositories>
 		<repository>
-			<id>cloud-jaxrsproviders</id>
-			<name>1C Cloud JaxRSProviders Repository</name>
-			<url>http://10.72.103.217:8090/maven/cloud-jaxrsproviders</url>
+			<id>my-internal-site</id>
+			<url>http://agentlab.ru/maven/repository</url>
 		</repository>
-	</distributionManagement>
+	</repositories>
+	
 </project>
