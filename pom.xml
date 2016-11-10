@@ -7,11 +7,12 @@
 	<groupId>org.eclipse.ecf.provider.jaxrs</groupId>
 	<artifactId>org.eclipse.ecf.provider.jaxrs.parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
+	
 	<packaging>pom</packaging>
 
 	<parent>
-		<groupId>org.eclipseorbit</groupId>
-		<artifactId>org.eclipseorbit.parent</artifactId>
+		<groupId>ru.agentlab</groupId>
+		<artifactId>ru.agentlab.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
@@ -77,7 +78,7 @@
 	
 	<repositories>
 		<repository>
-			<id>my-internal-site</id>
+			<id>agentlab</id>
 			<url>http://agentlab.ru/maven/repository</url>
 		</repository>
 	</repositories>
