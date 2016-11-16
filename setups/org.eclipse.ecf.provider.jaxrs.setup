@@ -255,12 +255,12 @@
       repositoryURL="https://github.com/agentlab/JaxRSProviders"
       userID="${github.user.id}"
       password="${github.user.password}">
-    <query summary="${scope.project.label} All Open Tasks">
+    <query summary="${scope.project.label} All Open">
       <attribute
           key="state"
           value="open::"/>
     </query>
-    <query summary="${scope.project.label} My Open Tasks">
+    <query summary="${scope.project.label} My Open">
       <attribute
           key="state"
           value="open::"/>
@@ -268,7 +268,7 @@
           key="assignee"
           value="${github.user.id}"/>
     </query>
-    <query summary="${scope.project.label} My Closed Tasks"
+    <query summary="${scope.project.label} My Closed"
         url="">
       <attribute
           key="state"
