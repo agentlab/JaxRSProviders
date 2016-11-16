@@ -252,7 +252,7 @@
   <setupTask
       xsi:type="mylyn:MylynQueriesTask"
       connectorKind="github"
-      repositoryURL="https://github.com/eclipse-orbit/JaxRSProviders"
+      repositoryURL="https://github.com/agentlab/JaxRSProviders"
       userID="${github.user.id}"
       password="${github.user.password}">
     <query summary="${scope.project.label} All Open Tasks">
