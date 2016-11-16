@@ -29,3 +29,4 @@ temp
 # Data Files #
 *.dat
 *.idn
+/releng/org.eclipse.ecf.provider.jaxrs.releng/*.target
