@@ -25,8 +25,8 @@ temp
 
 # Temporary Files #
 *.bak
+*.target
 
 # Data Files #
 *.dat
 *.idn
-/releng/org.eclipse.ecf.provider.jaxrs.releng/*.target
