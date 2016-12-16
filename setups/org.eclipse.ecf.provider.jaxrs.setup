@@ -87,38 +87,7 @@
           name="*"/>
       <sourceLocator
           rootFolder="${org.eclipse.ecf.provider.jaxrs.git.clone.location}"
-          locateNestedProjects="true">
-        <predicate
-            xsi:type="predicates:OrPredicate">
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.ecf.provider.jaxrs.*"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="org.eclipse.ecf.provider.jersey.*"/>
-          <operand
-              xsi:type="predicates:NamePredicate"
-              pattern="com.mycorp.examples.hello.*"/>
-          <operand
-              xsi:type="predicates:AndPredicate">
-            <operand
-                xsi:type="predicates:NamePredicate"
-                pattern="com.mycorp.examples.student.*"/>
-            <operand
-                xsi:type="predicates:NotPredicate">
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern="com.mycorp.examples.student.client"/>
-            </operand>
-            <operand
-                xsi:type="predicates:NotPredicate">
-              <operand
-                  xsi:type="predicates:NamePredicate"
-                  pattern="com.mycorp.examples.student.webapp.host"/>
-            </operand>
-          </operand>
-        </predicate>
-      </sourceLocator>
+          locateNestedProjects="true"/>
     </targlet>
   </setupTask>
   <setupTask
