@@ -15,4 +15,6 @@ Import-Package: com.mycorp.examples.hello;version="4.0.0",
  org.osgi.service.component.annotations;version="1.2.0"
 Bundle-Localization: bundle
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/com.mycorp.examples.hello.ds.host.HelloConfigurer.xml
+Service-Component: OSGI-INF/com.mycorp.examples.hello.ds.host.HelloConfigurer.xml,
+ OSGI-INF/com.mycorp.examples.hello.ds.configurer.HelloConfigurer.xml,
+ OSGI-INF/com.mycorp.examples.hello.ds.configurer.HelloConfigurable.xml

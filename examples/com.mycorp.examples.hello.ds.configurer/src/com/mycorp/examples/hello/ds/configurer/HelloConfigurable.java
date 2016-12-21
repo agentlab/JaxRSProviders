@@ -1,9 +1,10 @@
-package com.mycorp.examples.hello.ds.host;
+package com.mycorp.examples.hello.ds.configurer;
 
 import java.io.IOException;
 import java.util.Dictionary;
 
 import org.osgi.service.cm.ConfigurationException;
+import org.osgi.service.cm.ManagedService;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -20,14 +21,18 @@ import com.mycorp.examples.hello.model.HelloMessage;
 		"service.exported.interfaces=*"
 		,"service.exported.configs=ecf.jaxrs.jersey.server"
 		,"ecf.jaxrs.jersey.server.urlContext=http://localhost:8080"
-		,"ecf.jaxrs.jersey.server.alias=/hello"
+        , "ecf.jaxrs.jersey.server.alias=/helloconf"
 		,"service.pid=com.mycorp.examples.hello.ds.host.HelloComponent"
 	}
 )
-public class HelloComponent
-    implements IHello {
+public class HelloConfigurable implements IHello, ManagedService {
+	private String id;
+    private String database;
+    private String user;
+    private String password;
+    private String create;
 
-	public HelloComponent() {
+	public HelloConfigurable() {
 	}
 
 
@@ -144,6 +149,13 @@ public class HelloComponent
 
 	@Activate
 	public void activate(ComponentContext context) throws IOException {
+		Dictionary<String, Object> properties = context.getProperties();
+		//properties.put("database.id", "wewe");
+        id = (String) properties.get("database.id");
+        database = (String) properties.get("database");
+        user = (String) properties.get("user");
+        password = (String) properties.get("password");
+        create = (String)properties.get("create");
 		System.out.println("Hello service started");
 	}
 	@Deactivate

@@ -1,4 +1,4 @@
-package com.mycorp.examples.hello.ds.host;
+package com.mycorp.examples.hello.ds.configurer;
 
 import java.io.IOException;
 import java.util.Dictionary;
@@ -19,8 +19,9 @@ import org.osgi.service.component.annotations.Reference;
 		enabled = true
 		,immediate = true
 	)
-public class HelloConfigurer implements ManagedService{
-	
+public class HelloConfigurer
+    implements ManagedService {
+
 	@Reference
 	public void bindCm(ConfigurationAdmin configAdmin) throws IOException{
 		if (configAdmin != null) {
@@ -37,10 +38,10 @@ public class HelloConfigurer implements ManagedService{
 			config.update(props);
 		}
 	}
-	
+
 	public void unbindCm(ConfigurationAdmin configAdmin){
 	}
-	
+
 	@Activate
 	public void activate(ComponentContext context) {
 		System.out.println("HelloConfigurer service started");
@@ -55,7 +56,7 @@ public class HelloConfigurer implements ManagedService{
 	}
 
 	public void updated(Dictionary<String, ?> properties) throws ConfigurationException {
-		
+
 	}
 
 }
