@@ -44,10 +44,21 @@
   <setupTask
       xsi:type="setup.workingsets:WorkingSetTask">
     <workingSet
-        name="JaxRSProviders">
+        name="JaxRSProviders Core"
+        id="JaxRSProviders_Core">
       <predicate
-          xsi:type="predicates:LocationPredicate"
-          pattern=".*/JaxRSProviders/.*"/>
+          xsi:type="predicates:NamePredicate"
+          pattern="org.eclipse.ecf.provider.jaxrs.*"/>
+      <predicate
+          xsi:type="predicates:NamePredicate"
+          pattern="org.eclipse.ecf.provider.jersey.*"/>
+    </workingSet>
+    <workingSet
+        name="JaxRSProviders Examples"
+        id="JaxRSProvidersExamples">
+      <predicate
+          xsi:type="predicates:NamePredicate"
+          pattern="com.mycorp.examples.*"/>
     </workingSet>
   </setupTask>
   <setupTask
