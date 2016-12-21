@@ -1,7 +1,11 @@
 package org.eclipse.ecf.provider.jersey.server;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +24,7 @@ import org.eclipse.ecf.provider.jaxrs.server.JaxRSServerContainer.JaxRSServerRem
 import org.eclipse.ecf.provider.jaxrs.server.JaxRSServerDistributionProvider;
 import org.eclipse.ecf.remoteservice.RSARemoteServiceContainerAdapter.RSARemoteServiceRegistration;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.model.Parameter;
 import org.glassfish.jersey.server.model.Resource;
 import org.glassfish.jersey.server.model.ResourceMethod;
 import org.glassfish.jersey.servlet.ServletContainer;
@@ -34,7 +39,7 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 			.getProperty(JerseyServerContainer.class.getName() + ".defaultUrlContext", "http://localhost:8080");
 	public static final String ALIAS_PARAM = "alias";
 	public static final String ALIAS_PARAM_DEFAULT = "/org.eclipse.ecf.provider.jersey.server";
-	
+
 	public JerseyServerDistributionProvider() {
 		super();
 	}
@@ -73,10 +78,10 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 						results.add(registration.getService().getClass());
 						return results;
 					}*/
-					
+
 					@Override
 					public Set<Object> getSingletons() {
-						Set<Object> results = new HashSet<Object>();
+						Set<Object> results = new HashSet<>();
 						results.add(registration.getService());
 						return results;
 					}
@@ -88,7 +93,7 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 		@Override
 		protected Servlet createServlet(JaxRSServerRemoteServiceRegistration registration) {
 			ResourceConfig rc = createResourceConfig(registration);
-			
+
 			Class<?> implClass = registration.getService().getClass();
 			for (Class<?> clazz : implClass.getInterfaces()) {
 				if(clazz.getAnnotation(Path.class) == null) {
@@ -98,19 +103,19 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 					String serviceResourcePath;
 					String methodResourcePath;
 					String methodName;
-					
+
 					//class
 					serviceResourcePath = "/" + clazz.getSimpleName().toLowerCase();
 					resourceBuilder.path(serviceResourcePath);
 					resourceBuilder.name(implClass.getName());
-					
+
 					//methods
 					for(Method method : clazz.getMethods()) {
 						if(Modifier.isPublic(method.getModifiers())) {
 							methodName = method.getName().toLowerCase();
-							methodResourcePath = "/" + methodName;
+							methodResourcePath = "/" + methodName + "/{token}";
 							childResourceBuilder = resourceBuilder.addChildResource(methodResourcePath);
-							
+
 							if(method.getAnnotation(Path.class) == null) {
 								if(method.getParameterCount() == 0) {
 									methodBuilder = childResourceBuilder.addMethod("GET");
@@ -122,13 +127,44 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 									else {
 										methodBuilder = childResourceBuilder.addMethod("POST");
 									}
-									methodBuilder.consumes(MediaType.APPLICATION_JSON);//APPLICATION_JSON)TEXT_PLAIN_TYPE
+//									methodBuilder.consumes(MediaType.APPLICATION_JSON);//APPLICATION_JSON)TEXT_PLAIN_TYPE
 								}
+
+								Collection<Parameter> params = new ArrayList<>();
+
+								if (method.getName() == "hello3") {
+									Constructor<Parameter> constr;
+									try {
+										Constructor<?>[] constrs = Parameter.class.getDeclaredConstructors();
+										//                                        constr = ParamBuilder.class.getDeclaredConstructor(Object.class, Object.class,
+										//                                            Object.class, Object.class, Object.class, Object.class, boolean.class,
+										//                                            Object.class);
+										constr = (Constructor<Parameter>)constrs[1];
+										constr.setAccessible(true);
+										try {
+											Parameter par = constr.newInstance(null, null, Parameter.Source.PATH, "token", String.class, String.class, false, null);
+											params.add(par);
+										}
+										catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+									catch (SecurityException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									methodBuilder.handlerParameters(params);
+								}
+
+//                                List<ParamBuilder> params = ParamBuilder.create(implClass, implClass, method, false);
+
 								methodBuilder.produces(MediaType.APPLICATION_JSON)//APPLICATION_JSON)
 									//.handledBy(implClass, method)
 									.handledBy(registration.getService(), method)
 									.handlingMethod(method)
 									.extended(false);
+//									.handlerParameters(parameters);
 							}
 						}
 					}

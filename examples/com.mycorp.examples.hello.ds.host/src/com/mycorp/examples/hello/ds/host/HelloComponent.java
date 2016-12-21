@@ -21,40 +21,56 @@ import com.mycorp.examples.hello.model.HelloMessage;
 		"service.exported.interfaces=*"
 		,"service.exported.configs=ecf.jaxrs.jersey.server"
 		,"ecf.jaxrs.jersey.server.urlContext=http://localhost:8080"
-		,"ecf.jaxrs.jersey.server.alias=/hello"
+        , "ecf.jaxrs.jersey.server.alias=/hello"
 		,"service.pid=com.mycorp.examples.hello.ds.host.HelloComponent"
 	}
 )
+
+//@Path("/api/blob")
 public class HelloComponent implements IHello, ManagedService {
 	private String id;
     private String database;
     private String user;
     private String password;
     private String create;
-    
+	private String pathParam;
+
 	public HelloComponent() {
 	}
-	
-	public String hello() {
-		//System.out.println("received hello");
-		return "Hello service host says 'Hi' back to WWWWWWWW";
+
+	public void setPathParam(String pathParam) {
+		this.pathParam = pathParam;
 	}
 
-	public HelloMessage hello2() {
-		return new HelloMessage("RRR", "EEE");
+	public String getPathParam() {
+		return pathParam;
 	}
-	
-	public HelloMessage hello3(String from) {
-		//System.out.println("received hello from="+from);
-		return new HelloMessage("RRR", "EEE");
+
+//    public HelloComponent(@PathParam("token") String pathParam) {
+//        this.pathParam = pathParam;
+//    }
+
+//	public String hello() {
+//		//System.out.println("received hello");
+//		return "Hello service host says 'Hi' back to WWWWWWWW";
+//	}
+//
+//	public HelloMessage hello2() {
+//		return new HelloMessage("RRR", "EEE");
+//	}
+
+//    @Path("/{token}")
+//    @PUT
+	public String hello3(/*@PathParam("token")*/ String token) {
+		System.out.println("received hello from=" + token);
+		return "Hello " + token;
 	}
 
 	public HelloMessage hello4(HelloMessage message) {
 		//System.out.println("received HelloMessage="+message);
 		return message;
 	}
-	
-	
+
 	@Activate
 	public void activate(ComponentContext context) throws IOException {
 		Dictionary<String, Object> properties = context.getProperties();
@@ -63,8 +79,8 @@ public class HelloComponent implements IHello, ManagedService {
         database = (String) properties.get("database");
         user = (String) properties.get("user");
         password = (String) properties.get("password");
-        create = (String) properties.get("create");	
-		System.out.println("Hello service started");
+		create = (String)properties.get("create");
+		System.err.println("Hello service started");
 	}
 	@Deactivate
 	public void deactivate(ComponentContext context) {

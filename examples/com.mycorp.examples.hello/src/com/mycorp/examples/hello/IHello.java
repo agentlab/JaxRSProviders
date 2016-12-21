@@ -1,14 +1,16 @@
 package com.mycorp.examples.hello;
 
-import com.mycorp.examples.hello.model.HelloMessage;
-
+//@Path("/api/blob")
 public interface IHello {
-	
-	public String hello();
-	
-	public HelloMessage hello2();
 
-	public HelloMessage hello3(String from);
-	
-	public HelloMessage hello4(HelloMessage message);
+//	public String hello();
+//
+//	public HelloMessage hello2();
+
+//  @Path("/{token}")
+//  @GET
+	public String hello3(/*@PathParam("token")*/ String token);
+
+//	public HelloMessage hello4(HelloMessage message);
 }
+
