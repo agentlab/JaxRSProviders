@@ -1,5 +1,6 @@
 package org.eclipse.ecf.provider.jersey.server;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -121,7 +122,7 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 									methodBuilder = childResourceBuilder.addMethod("GET");
 								}
 								else {
-									if(methodName.contains("delete")){
+									if(methodName.contains("delete")) {
 										methodBuilder = childResourceBuilder.addMethod("DELETE");
 									}
 									else {
@@ -134,6 +135,15 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 
 								if (method.getName() == "hello3") {
 									Constructor<Parameter> constr;
+
+//									Map<String, Object> valuesMap = new HashMap<>();
+//									valuesMap.put("value", "token");
+//
+//									RuntimeAnnotations.putAnnotation(implClass, PathParam.class, valuesMap);
+
+//									PathParam annotation = implClass..getAnnotation(TestAnnotation.class);
+//								    System.out.println("TestClass annotation after:" + annotation);
+
 									try {
 										Constructor<?>[] constrs = Parameter.class.getDeclaredConstructors();
 										//                                        constr = ParamBuilder.class.getDeclaredConstructor(Object.class, Object.class,
@@ -142,7 +152,10 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 										constr = (Constructor<Parameter>)constrs[1];
 										constr.setAccessible(true);
 										try {
-											Parameter par = constr.newInstance(null, null, Parameter.Source.PATH, "token", String.class, String.class, false, null);
+											MyPathParam mpp = new MyPathParam();
+											Annotation[] markers = new Annotation[] { new MyPathParam() };
+
+											Parameter par = constr.newInstance(markers, new MyPathParam(), Parameter.Source.PATH, "token", String.class, String.class, false, null);
 											params.add(par);
 										}
 										catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -154,15 +167,19 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-									methodBuilder.handlerParameters(params);
+									methodBuilder
+									.handlerParameters(params);
+//									.handledBy(implClass, method);
+
 								}
 
 //                                List<ParamBuilder> params = ParamBuilder.create(implClass, implClass, method, false);
 
 								methodBuilder.produces(MediaType.APPLICATION_JSON)//APPLICATION_JSON)
 									//.handledBy(implClass, method)
-									.handledBy(registration.getService(), method)
-									.handlingMethod(method)
+
+									.handledBy(implClass, method)
+//									.handlingMethod(method)
 									.extended(false);
 //									.handlerParameters(parameters);
 							}
