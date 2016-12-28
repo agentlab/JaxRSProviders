@@ -3,6 +3,8 @@ package com.mycorp.examples.hello.ds.host;
 import java.io.IOException;
 import java.util.Dictionary;
 
+import javax.ws.rs.PathParam;
+
 import org.osgi.service.cm.ConfigurationException;
 import org.osgi.service.cm.ManagedService;
 import org.osgi.service.component.ComponentContext;
@@ -61,8 +63,8 @@ public class HelloComponent implements IHello, ManagedService {
 
 //    @Path("/{token}")
 //    @PUT
-	public String hello3(/*@PathParam("token")*/ String token) {
-		System.out.println("received hello from=" + token);
+    public String hello3(@PathParam("token") String token) {
+		System.err.println("received hello from=" + token);
 		return "Hello " + token;
 	}
 

@@ -31,6 +31,11 @@ import org.glassfish.jersey.server.model.ResourceMethod;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.osgi.service.http.HttpService;
 
+import javassist.ClassClassPath;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.NotFoundException;
+
 public class JerseyServerDistributionProvider extends JaxRSServerDistributionProvider {
 
 	public static final String JERSEY_SERVER_CONFIG_NAME = "ecf.jaxrs.jersey.server";
@@ -100,33 +105,65 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 				if(clazz.getAnnotation(Path.class) == null) {
 					final Resource.Builder resourceBuilder = Resource.builder();
 					ResourceMethod.Builder methodBuilder;
-					Resource.Builder childResourceBuilder;
+//					Resource.Builder childResourceBuilder;
 					String serviceResourcePath;
 					String methodResourcePath;
 					String methodName;
 
 					//class
-					serviceResourcePath = "/" + clazz.getSimpleName().toLowerCase();
+					serviceResourcePath = "/" + clazz.getSimpleName().toLowerCase() + "/{token}";
 					resourceBuilder.path(serviceResourcePath);
 					resourceBuilder.name(implClass.getName());
 
 					//methods
-					for(Method method : clazz.getMethods()) {
+                    for (Method method : implClass.getMethods())
+                    {
+                        if (method.getName() == "hello3")
+                        {
+
+                            ClassPool pool = ClassPool.getDefault();
+                            CtClass liveClass = null;
+                            try
+                            {
+                                pool.insertClassPath(new ClassClassPath(implClass));
+                                liveClass = pool.get("com.mycorp.examples.hello.ds.host.HelloComponent");
+                            }
+                            catch (NotFoundException e)
+                            {
+                                System.err.println("Template class not found.");
+                            }
+
 						if(Modifier.isPublic(method.getModifiers())) {
 							methodName = method.getName().toLowerCase();
-							methodResourcePath = "/" + methodName + "/{token}";
-							childResourceBuilder = resourceBuilder.addChildResource(methodResourcePath);
+//							methodResourcePath = "/" + methodName + "/{token}";
+//							childResourceBuilder = resourceBuilder.addChildResource(methodResourcePath);
+
+
+							Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+							Class[] parameterTypes = method.getParameterTypes();
+
+							int i=0;
+							for(Annotation[] annotations : parameterAnnotations){
+							  Class parameterType = parameterTypes[i++];
+
+							  for(Annotation annotation : annotations){
+//							    if(annotation instanceof MyAnnotation){
+//							        MyAnnotation myAnnotation = (MyAnnotation) annotation;
+							        System.err.println("value: " + annotation.toString());
+//							    }
+							  }
+                            }
 
 							if(method.getAnnotation(Path.class) == null) {
 								if(method.getParameterCount() == 0) {
-									methodBuilder = childResourceBuilder.addMethod("GET");
+                                    methodBuilder = resourceBuilder.addMethod("GET");
 								}
 								else {
 									if(methodName.contains("delete")) {
-										methodBuilder = childResourceBuilder.addMethod("DELETE");
+                                        methodBuilder = resourceBuilder.addMethod("DELETE");
 									}
 									else {
-										methodBuilder = childResourceBuilder.addMethod("POST");
+                                        methodBuilder = resourceBuilder.addMethod("POST");
 									}
 //									methodBuilder.consumes(MediaType.APPLICATION_JSON);//APPLICATION_JSON)TEXT_PLAIN_TYPE
 								}
@@ -184,6 +221,7 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
 //									.handlerParameters(parameters);
 							}
 						}
+                        }
 					}
 					final Resource resource = resourceBuilder.build();
 					rc.registerResources(resource);

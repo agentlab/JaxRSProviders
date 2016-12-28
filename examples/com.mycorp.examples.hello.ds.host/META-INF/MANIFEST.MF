@@ -17,3 +17,5 @@ Bundle-Localization: bundle
 Bundle-ActivationPolicy: lazy
 Service-Component: OSGI-INF/com.mycorp.examples.hello.ds.host.HelloComponent.xml,
  OSGI-INF/com.mycorp.examples.hello.ds.host.HelloConfigurer.xml
+Require-Bundle: javax.ws.rs
+DynamicImport-Package: *

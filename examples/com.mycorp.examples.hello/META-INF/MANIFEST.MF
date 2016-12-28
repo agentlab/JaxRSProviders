@@ -12,3 +12,5 @@ Bundle-Localization: bundle
 Import-Package: com.mycorp.examples.hello.model,
  org.eclipse.ecf.remoteservice
 Bundle-ActivationPolicy: lazy
+Require-Bundle: javax.ws.rs
+DynamicImport-Package: *
