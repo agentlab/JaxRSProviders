@@ -31,10 +31,15 @@ import org.glassfish.jersey.server.model.ResourceMethod;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.osgi.service.http.HttpService;
 
+import javassist.CannotCompileException;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
-import javassist.NotFoundException;
+import javassist.CtMethod;
+import javassist.bytecode.AnnotationsAttribute;
+import javassist.bytecode.ClassFile;
+import javassist.bytecode.ConstPool;
+import javassist.bytecode.annotation.IntegerMemberValue;
 
 public class JerseyServerDistributionProvider extends JaxRSServerDistributionProvider {
 
@@ -126,12 +131,39 @@ public class JerseyServerDistributionProvider extends JaxRSServerDistributionPro
                             try
                             {
                                 pool.insertClassPath(new ClassClassPath(implClass));
+                                pool.insertClassPath(new ClassClassPath(clazz));
+                            //                                pool.importPackage("com.mycorp.examples.hello.IHello");
+
                                 liveClass = pool.get("com.mycorp.examples.hello.ds.host.HelloComponent");
+                            //                                liveClass = pool.get("com.mycorp.examples.hello.IHello");
+
+                            //                                liveClass.toC
+
+
+                                ClassFile ccFile = liveClass.getClassFile();
+                                ConstPool constpool = ccFile.getConstPool();
+
+                                AnnotationsAttribute attr =
+                                    new AnnotationsAttribute(constpool, AnnotationsAttribute.visibleTag);
+                                javassist.bytecode.annotation.Annotation annot =
+                                    new javassist.bytecode.annotation.Annotation("Test", constpool);
+                                annot.addMemberValue("value", new IntegerMemberValue(ccFile.getConstPool(), 0));
+                                attr.addAnnotation(annot);
+
+                                CtMethod mthd = liveClass.getDeclaredMethod("hello3");
+
+                                mthd.getMethodInfo().addAttribute(attr);
+
+                                clazz = liveClass.toClass(ClassLoader.getSystemClassLoader());
+
                             }
-                            catch (NotFoundException e)
+                            catch (NotFoundException | CannotCompileException e)
                             {
-                                System.err.println("Template class not found.");
+                                e.printStackTrace();
+                            //                                System.err.println("Template class not found.");
                             }
+
+
 
 						if(Modifier.isPublic(method.getModifiers())) {
 							methodName = method.getName().toLowerCase();

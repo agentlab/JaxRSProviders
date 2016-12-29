@@ -12,5 +12,6 @@ Bundle-Localization: bundle
 Import-Package: com.mycorp.examples.hello.model,
  org.eclipse.ecf.remoteservice
 Bundle-ActivationPolicy: lazy
-Require-Bundle: javax.ws.rs
+Require-Bundle: javax.ws.rs,
+ org.glassfish.jersey.core.jersey-server;bundle-version="2.23.2"
 DynamicImport-Package: *
