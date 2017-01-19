@@ -15,6 +15,22 @@
     name="ecf.provider.jaxrs"
     label="JaxRSProviders">
   <setupTask
+      xsi:type="setup:CompoundTask"
+      name="User Preferences">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="org.eclipse.debug.ui">
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.debug.ui/Console.highWaterMark"
+          value="8008000"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.debug.ui/Console.lowWaterMark"
+          value="8000000"/>
+    </setupTask>
+  </setupTask>
+  <setupTask
       xsi:type="pde:APIBaselineTask"
       name="ECF"
       version="3.13.2"
