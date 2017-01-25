@@ -31,30 +31,29 @@ public class HelloComponent implements IHello, ManagedService {
     private String user;
     private String password;
     private String create;
-    
+
 	public HelloComponent() {
 	}
-	
+
 	public String hello() {
 		//System.out.println("received hello");
 		return "Hello service host says 'Hi' back to WWWWWWWW";
 	}
 
 	public HelloMessage hello2() {
-		return new HelloMessage("RRR", "EEE");
+        return new HelloMessage("Nika", "Dyoma", "Хочу сдать курсач!");
 	}
-	
+
 	public HelloMessage hello3(String from) {
 		//System.out.println("received hello from="+from);
-		return new HelloMessage("RRR", "EEE");
+        return new HelloMessage("RRR", "UUU");
 	}
 
 	public HelloMessage hello4(HelloMessage message) {
 		//System.out.println("received HelloMessage="+message);
 		return message;
 	}
-	
-	
+
 	@Activate
 	public void activate(ComponentContext context) throws IOException {
 		Dictionary<String, Object> properties = context.getProperties();
@@ -63,7 +62,7 @@ public class HelloComponent implements IHello, ManagedService {
         database = (String) properties.get("database");
         user = (String) properties.get("user");
         password = (String) properties.get("password");
-        create = (String) properties.get("create");	
+        create = (String)properties.get("create");
 		System.out.println("Hello service started");
 	}
 	@Deactivate
