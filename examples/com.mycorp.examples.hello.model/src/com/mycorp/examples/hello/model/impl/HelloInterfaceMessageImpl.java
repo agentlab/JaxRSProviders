@@ -6,16 +6,22 @@ public class HelloInterfaceMessageImpl implements IHelloInterfaceMessage {
 
 	private String from;
 	private String message;
-	private int[] array = {1, 1, 2, 3, 5, 8, 13, 21};
-	
+    private String description;
+
 	public HelloInterfaceMessageImpl() {
 	}
-	
+
 	public HelloInterfaceMessageImpl(String from, String message) {
 		this.from = from;
 		this.message = message;
 	}
-	
+
+    public HelloInterfaceMessageImpl(String from, String message, String description) {
+        this.from = from;
+        this.message = message;
+        this.description = description;
+    }
+
 	/* (non-Javadoc)
 	 * @see com.mycorp.examples.hello.model.IHelloInterfaceMessage#getFrom()
 	 */
@@ -23,7 +29,7 @@ public class HelloInterfaceMessageImpl implements IHelloInterfaceMessage {
 	public String getFrom() {
 		return from;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.mycorp.examples.hello.model.IHelloInterfaceMessage#getMessage()
 	 */
@@ -31,20 +37,14 @@ public class HelloInterfaceMessageImpl implements IHelloInterfaceMessage {
 	public String getMessage() {
 		return message;
 	}
-	
+
 	/* (non-Javadoc)
-	 * @see com.mycorp.examples.hello.model.IHelloInterfaceMessage#getArray()
-	 */
-	@Override
-	public int[] getArray() {
-        return array;
+     * @see com.mycorp.examples.hello.model.IHelloInterfaceMessage#getDescription()
+     */
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
-    /* (non-Javadoc)
-	 * @see com.mycorp.examples.hello.model.IHelloInterfaceMessage#setArray(int[])
-	 */
-    @Override
-	public void setArray(int[] array) {
-        this.array = array;
-    }
 }

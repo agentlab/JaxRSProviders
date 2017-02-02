@@ -9,25 +9,32 @@
 ******************************************************************************/
 package com.mycorp.examples.student;
 
-import java.util.List;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 @Path("/ihello")
 public interface StudentService {
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
 	@Path("/hello")
-	public String hello();
-	
+    public String hello();
+
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/students")
-	List<Student> getStudents();
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("{name}")
+    public String hello6(@Context HttpHeaders header, @PathParam("name") String name);
+
+    /*@GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/students")
+    List<Student> getStudents();
+    */
 
 	/*@GET
 	@Produces(MediaType.APPLICATION_XML)

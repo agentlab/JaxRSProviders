@@ -26,11 +26,11 @@ import com.mycorp.examples.hello.model.HelloMessage;
 	}
 )
 public class HelloComponent implements IHello, ManagedService {
-	private String id;
-    private String database;
-    private String user;
-    private String password;
-    private String create;
+    //private String id;
+    //private String database;
+    //private String user;
+    //private String password;
+    //private String create;
 
 	public HelloComponent() {
 	}
@@ -46,7 +46,7 @@ public class HelloComponent implements IHello, ManagedService {
 
 	public HelloMessage hello3(String from) {
 		//System.out.println("received hello from="+from);
-        return new HelloMessage("RRR", "UUU");
+        return new HelloMessage(from, "UUU");
 	}
 
 	public HelloMessage hello4(HelloMessage message) {
@@ -56,13 +56,13 @@ public class HelloComponent implements IHello, ManagedService {
 
 	@Activate
 	public void activate(ComponentContext context) throws IOException {
-		Dictionary<String, Object> properties = context.getProperties();
+        //Dictionary<String, Object> properties = context.getProperties();
 		//properties.put("database.id", "wewe");
-        id = (String) properties.get("database.id");
-        database = (String) properties.get("database");
-        user = (String) properties.get("user");
-        password = (String) properties.get("password");
-        create = (String)properties.get("create");
+        //id = (String) properties.get("database.id");
+        //database = (String) properties.get("database");
+        //user = (String) properties.get("user");
+        //password = (String) properties.get("password");
+        //create = (String)properties.get("create");
 		System.out.println("Hello service started");
 	}
 	@Deactivate
@@ -74,7 +74,7 @@ public class HelloComponent implements IHello, ManagedService {
 		System.out.println("Hello service modified");
 	}
 
-	public void updated(Dictionary<String, ?> properties) throws ConfigurationException {
-		System.out.println(properties);
-	}
+    public void updated(Dictionary<String, ?> properties) throws ConfigurationException {
+        System.out.println(properties);
+    }
 }

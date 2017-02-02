@@ -5,7 +5,6 @@ public class HelloMessage {
 
 	private String from;
 	private String message;
-    private int[] array = { 1 };
     private String description;
 
 	public HelloMessage() {
@@ -33,14 +32,6 @@ public class HelloMessage {
 	public String getMessage() {
 		return message;
 	}
-
-	public int[] getArray() {
-        return array;
-    }
-
-    public void setArray(int[] array) {
-        this.array = array;
-    }
 
     public void setDescription(String description) {
         this.description = description;

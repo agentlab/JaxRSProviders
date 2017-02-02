@@ -9,36 +9,35 @@
 ******************************************************************************/
 package com.mycorp.examples.student.client;
 
-import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 
-import com.mycorp.examples.student.Student;
 import com.mycorp.examples.student.StudentService;
 
-public class StudentServiceClient {
+@Path("/ihello")
+public class StudentServiceClient
+    implements StudentService {
 
-	void bindStudentService(StudentService service) {
-		System.out.println("Discovered student service=" + service);
-		// Get students
-		List<Student> originalStudents = service.getStudents();
-		// Print list
-		System.out.println("students=" + originalStudents);
-		// Get first student
-		Student s = originalStudents.get(0);
-		System.out.println("Student 0=" + s);
-		if (s != null) {
-			// Get this student via id
-			s = service.getStudent(s.getId());
-			System.out.println("Student with id=" + s.getId() + "=" + s);
-		}
-		// Add a new student
-		Student newStudent = service.addStudent("April Snow");
-		System.out.println("Created student=" + newStudent);
-		// Update with grade
-		newStudent.setGrade("First");
-		newStudent = service.updateStudent(newStudent);
-		System.out.println("Updated student=" + newStudent);
-		// Delete student
-		System.out.println("Deleted student=" + service.deleteStudent(newStudent.getId()));
-	}
+    @Override
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/hello")
+    public String hello() {
+        return "hello";
+    }
 
+
+    @Override
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("{name}")
+    public String hello6(@Context HttpHeaders header, @PathParam("name") String name) {
+        String result = "Hello" + name;
+        return result;
+    }
 }

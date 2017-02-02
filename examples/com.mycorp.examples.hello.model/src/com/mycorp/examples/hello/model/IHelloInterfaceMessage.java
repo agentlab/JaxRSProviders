@@ -6,8 +6,5 @@ public interface IHelloInterfaceMessage {
 
 	String getMessage();
 
-	int[] getArray();
-
-	void setArray(int[] array);
-
+    String getDescription();
 }
